@@ -1,6 +1,6 @@
 # spinal-env-viewer-context-menu-service
 
-spinal-env-viewer-context-menu-service is a service to add button to a named hook for application later can retrive them via the hookname.
+spinal-env-viewer-context-menu-service is a service to add icon button to a namedhook so the application UI can later retrive them via the hookname.
 
 ## Installation
 
