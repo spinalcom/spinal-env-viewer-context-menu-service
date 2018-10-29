@@ -1,19 +1,19 @@
 /*
  * Copyright 2018 SpinalCom - www.spinalcom.com
- * 
+ *
  * This file is part of SpinalCore.
- * 
+ *
  * Please read all of the following terms and conditions
  * of the Free Software license Agreement ("Agreement")
  * carefully.
- * 
+ *
  * This Agreement is a legally binding contract between
  * the Licensee (as defined below) and SpinalCom that
  * sets forth the terms and conditions that govern your
  * use of the Program. By installing and/or using the
  * Program, you agree to abide by all the terms and
  * conditions stated or referenced herein.
- * 
+ *
  * If you do not agree to abide by these terms and
  * conditions, do not demonstrate your acceptance and do
  * not install or use the Program.
@@ -72,12 +72,20 @@ class SpinalContextMenuService {
 
     // create the array if not exist
     if (!(appsInHooks instanceof Array)) {
-      return [];
+      return Promise.resolve([]);
     }
 
     let promises = appsInHooks.map(e => e.isShown(option));
     return Promise.all(promises)
-      .then(result => result.filter(e => e !== -1), () => {})
+      .then(
+        results => {
+          const resultApps = [];
+          for (var i = 0; i < results.length; i++)
+            if (results[i] !== -1) resultApps.push(appsInHooks[i]);
+          return resultApps;
+        },
+        () => []
+      )
       .catch(console.error);
   }
 }
