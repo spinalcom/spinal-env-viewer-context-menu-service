@@ -32,12 +32,12 @@
  * @property {object} buttonCfg Object configuration of the Application button
  * @property {string} buttonCfg.icon=tab can be a font-awsome or material icon string
  * @property {string} buttonCfg.icon_type=in Where to place the icon in the `md-icon`. Should be one of theses `class`, `in`, `src`
- * @property {string} buttonCfg.backgroundColor=0000FF backgroud color of the button
- * @property {string} buttonCfg.fontColor=FFFFFF font color of the button
+ * @property {string} buttonCfg.backgroundColor=#0000FF backgroud color of the button
+ * @property {string} buttonCfg.fontColor=#FFFFFF font color of the button
  * @property {objet} [badgeCfg] Object configuration of the Application button badge
  * @property {string} badgeCfg.label string shown in a badge; if empty it's not shown
- * @property {string} badgeCfg.backgroundColor=FF0000 backgroud color of the badge
- * @property {string} badgeCfg.fontColor=FFFFFF font color of the badge
+ * @property {string} badgeCfg.backgroundColor=#FF0000 backgroud color of the badge
+ * @property {string} badgeCfg.fontColor=#FFFFFF font color of the badge
  */
 class SpinalContextApp {
   /**
@@ -47,12 +47,12 @@ class SpinalContextApp {
    * @param {object} buttonCfg Object configuration of the Application button
    * @param {string} buttonCfg.icon=tab can be a font-awsome or material icon string
    * @param {string} buttonCfg.icon_type=in Where to place the icon in the `md-icon`. Should be one of theses `class`, `in`, `src`
-   * @param {string} buttonCfg.backgroundColor=0000FF backgroud color of the button
-   * @param {string} buttonCfg.fontColor=FFFFFF font color of the button
+   * @param {string} buttonCfg.backgroundColor=#0000FF backgroud color of the button
+   * @param {string} buttonCfg.fontColor=#FFFFFF font color of the button
    * @param {objet} [badgeCfg] Object configuration of the Application button badge
    * @param {string} badgeCfg.label string shown in a badge; if empty it's not shown
-   * @param {string} badgeCfg.backgroundColor=FF0000 backgroud color of the badge
-   * @param {string} badgeCfg.fontColor=FFFFFF font color of the badge
+   * @param {string} badgeCfg.backgroundColor=#FF0000 backgroud color of the badge
+   * @param {string} badgeCfg.fontColor=#FFFFFF font color of the badge
    * @memberof SpinalContextApp
    */
   constructor(label, description, buttonCfg, badgeCfg = {}) {
@@ -61,14 +61,14 @@ class SpinalContextApp {
     this.buttonCfg = {
       icon: buttonCfg.icon || "tab",
       icon_type: buttonCfg.icon_type || "in",
-      backgroundColor: buttonCfg.backgroundColor || "0000FF",
-      fontColor: buttonCfg.fontColor || "FFFFFF"
+      backgroundColor: colorHash(buttonCfg.backgroundColor || "#0000FF"),
+      fontColor: colorHash(buttonCfg.fontColor || "#FFFFFF")
     };
 
     this.badgeCfg = {
       label: badgeCfg.label || "",
-      backgroundColor: badgeCfg.backgroundColor || "FF0000",
-      fontColor: badgeCfg.fontColor || "FFFFFF"
+      backgroundColor: colorHash(badgeCfg.backgroundColor || "#FF0000"),
+      fontColor: colorHash(badgeCfg.fontColor || "#FFFFFF")
     };
   }
 
@@ -92,3 +92,8 @@ class SpinalContextApp {
 }
 
 module.exports = SpinalContextApp;
+
+function colorHash(color) {
+  if (color[0] === "#") return color;
+  return "#" + color;
+}
