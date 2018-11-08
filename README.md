@@ -28,8 +28,8 @@ class SpinalContextAppTest extends SpinalContextApp {
     super("testlabel", "test description", {
       icon: "add",
       icon_type: "in",
-      backgroundColor: "000000",
-      fontColor: "FFFFFF"
+      backgroundColor: "#000000",
+      fontColor: "#FFFFFF"
     });
   }
 
@@ -64,10 +64,10 @@ spinalContextMenuService
 //     buttonCfg:
 //      { icon: 'add',
 //        icon_type: 'in',
-//        backgroundColor: '000000',
-//        fontColor: 'FFFFFF' },
+//        backgroundColor: '#000000',
+//        fontColor: '#FFFFFF' },
 //     badgeCfg:
-//      { label: '', backgroundColor: 'FF0000', fontColor: 'FFFFFF' } } ]
+//      { label: '', backgroundColor: '#FF0000', fontColor: '#FFFFFF' } } ]
 ```
 
 ---
@@ -156,12 +156,12 @@ Creates an instance of SpinalContextMenuService.
 | buttonCfg | <code>object</code> |  | Object configuration of the Application button |
 | buttonCfg.icon | <code>string</code> | <code>&quot;tab&quot;</code> | can be a font-awsome or material icon string |
 | buttonCfg.icon_type | <code>string</code> | <code>&quot;in&quot;</code> | Where to place the icon in the `md-icon`. Should be one of theses `class`, `in`, `src` |
-| buttonCfg.backgroundColor | <code>string</code> | <code>&quot;0000FF&quot;</code> | backgroud color of the button |
-| buttonCfg.fontColor | <code>string</code> | <code>&quot;FFFFFF&quot;</code> | font color of the button |
+| buttonCfg.backgroundColor | <code>string</code> | <code>&quot;#0000FF&quot;</code> | backgroud color of the button |
+| buttonCfg.fontColor | <code>string</code> | <code>&quot;#FFFFFF&quot;</code> | font color of the button |
 | [badgeCfg] | <code>objet</code> |  | Object configuration of the Application button badge |
 | badgeCfg.label | <code>string</code> |  | string shown in a badge; if empty it's not shown |
-| badgeCfg.backgroundColor | <code>string</code> | <code>&quot;FF0000&quot;</code> | backgroud color of the badge |
-| badgeCfg.fontColor | <code>string</code> | <code>&quot;FFFFFF&quot;</code> | font color of the badge |
+| badgeCfg.backgroundColor | <code>string</code> | <code>&quot;#FF0000&quot;</code> | backgroud color of the badge |
+| badgeCfg.fontColor | <code>string</code> | <code>&quot;#FFFFFF&quot;</code> | font color of the badge |
 
 
 * [SpinalContextApp](#SpinalContextApp)
@@ -219,12 +219,12 @@ Creates an instance of SpinalContextApp.
 | buttonCfg | <code>object</code> |  | Object configuration of the Application button |
 | buttonCfg.icon | <code>string</code> | <code>&quot;tab&quot;</code> | can be a font-awsome or material icon string |
 | buttonCfg.icon_type | <code>string</code> | <code>&quot;in&quot;</code> | Where to place the icon in the `md-icon`. Should be one of theses `class`, `in`, `src` |
-| buttonCfg.backgroundColor | <code>string</code> | <code>&quot;0000FF&quot;</code> | backgroud color of the button |
-| buttonCfg.fontColor | <code>string</code> | <code>&quot;FFFFFF&quot;</code> | font color of the button |
+| buttonCfg.backgroundColor | <code>string</code> | <code>&quot;#0000FF&quot;</code> | backgroud color of the button |
+| buttonCfg.fontColor | <code>string</code> | <code>&quot;#FFFFFF&quot;</code> | font color of the button |
 | [badgeCfg] | <code>objet</code> |  | Object configuration of the Application button badge |
 | badgeCfg.label | <code>string</code> |  | string shown in a badge; if empty it's not shown |
-| badgeCfg.backgroundColor | <code>string</code> | <code>&quot;FF0000&quot;</code> | backgroud color of the badge |
-| badgeCfg.fontColor | <code>string</code> | <code>&quot;FFFFFF&quot;</code> | font color of the badge |
+| badgeCfg.backgroundColor | <code>string</code> | <code>&quot;#FF0000&quot;</code> | backgroud color of the badge |
+| badgeCfg.fontColor | <code>string</code> | <code>&quot;#FFFFFF&quot;</code> | font color of the badge |
 
 
 ---

@@ -28,8 +28,8 @@ class SpinalContextAppTest extends SpinalContextApp {
     super("testlabel", "test description", {
       icon: "add",
       icon_type: "in",
-      backgroundColor: "000000",
-      fontColor: "FFFFFF"
+      backgroundColor: "#000000",
+      fontColor: "#FFFFFF"
     });
   }
 
@@ -64,10 +64,10 @@ spinalContextMenuService
 //     buttonCfg:
 //      { icon: 'add',
 //        icon_type: 'in',
-//        backgroundColor: '000000',
-//        fontColor: 'FFFFFF' },
+//        backgroundColor: '#000000',
+//        fontColor: '#FFFFFF' },
 //     badgeCfg:
-//      { label: '', backgroundColor: 'FF0000', fontColor: 'FFFFFF' } } ]
+//      { label: '', backgroundColor: '#FF0000', fontColor: '#FFFFFF' } } ]
 ```
 
 ---
