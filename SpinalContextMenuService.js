@@ -54,8 +54,9 @@ class SpinalContextMenuService {
     }
 
     // push the app if not exist
-    if (appsInHooks.indexOf(spinalContextApp) === -1)
+    if (appsInHooks.indexOf(spinalContextApp) === -1) {
       appsInHooks.push(spinalContextApp);
+    }
   }
 
   /**
@@ -75,13 +76,26 @@ class SpinalContextMenuService {
       return Promise.resolve([]);
     }
 
-    let promises = appsInHooks.map(e => e.isShown(option));
+    let promises = appsInHooks.map(e => {
+      try {
+        let prom = e.isShown(option)
+          .then((res) => {
+            return res;
+          });
+        return prom;
+
+      } catch (error) {
+        console.error(error);
+        return -1;
+      }
+    });
     return Promise.all(promises)
       .then(
         results => {
           const resultApps = [];
-          for (var i = 0; i < results.length; i++)
+          for (var i = 0; i < results.length; i++) {
             if (results[i] !== -1) resultApps.push(appsInHooks[i]);
+          }
           return resultApps;
         },
         () => []
