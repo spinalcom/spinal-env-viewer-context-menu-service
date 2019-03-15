@@ -22,6 +22,7 @@
  * <http://resources.spinalcom.com/licenses.pdf>.
  */
 
+
 /**
  *  Containter like service to register and get applications relative to a hookname
  *
@@ -35,16 +36,47 @@ class SpinalContextMenuService {
    */
   constructor() {
     this.apps = {};
+    this.promiseByAppProfileId = {};
   }
-
+  
+  /**
+   * Return true if user has access to this appProfile
+   * @param appProfileId
+   * @return {PromiseLike<boolean > | Promise<boolean>}
+   */
+  hasUserRight(appProfileId){
+    const path = '/etc/UserProfileDir/' + window.spinal.spinalSystem.getUser().username;
+      return window.spinal.spinalSystem
+        .load(path)
+        .then((userProfile) => {
+          let res = false;
+          if (userProfile){
+            for (let i = 0; i < userProfile.appProfiles.length && !res; i++) {
+              res = (userProfile.appProfiles[i] & appProfileId) !== 0;
+            }
+          }
+          return res;
+        });
+    }
+  
+  
+  
   /**
    * method to register the Application to a hook
    *
    * @param {string} hookname the place where is application button is located
    * @param {SpinalContextApp} spinalContextApp the application
+   * @param {number} appProfileId id of the group that can use the application
+   * button
    * @memberof SpinalContextMenuService
    */
-  registerApp(hookname, spinalContextApp) {
+  registerApp(hookname, spinalContextApp, appProfileId) {
+    if (typeof appProfileId === "undefined") {
+      console.warn('Deprecated: The usage of this function without the third' +
+        ' parameter appProfileId is deprecated your button is lock for admin' +
+        ' only until you set the third parameter');
+      appProfileId = 1;
+    }
     // get the array of apps of the hook
     let appsInHooks = this.apps[hookname];
 
@@ -52,11 +84,20 @@ class SpinalContextMenuService {
     if (!(appsInHooks instanceof Array)) {
       appsInHooks = this.apps[hookname] = [];
     }
-
-    // push the app if not exist
-    if (appsInHooks.indexOf(spinalContextApp) === -1) {
-      appsInHooks.push(spinalContextApp);
+    
+    
+    if (!this.promiseByAppProfileId.hasOwnProperty( appProfileId )) {
+      this.promiseByAppProfileId[appProfileId] = this.hasUserRight(appProfileId);
     }
+    
+    this.promiseByAppProfileId[appProfileId].then(
+      hasAccess => {
+        // push the app if not exist ans user has access to the button
+        if (hasAccess && appsInHooks.indexOf(spinalContextApp) === -1 ) {
+          appsInHooks.push(spinalContextApp);
+        }
+      }
+    )
   }
 
   /**
