@@ -25,12 +25,13 @@
 const G_root = typeof window == "undefined" ? global : window;
 const SpinalContextMenuService = require("./SpinalContextMenuService");
 const SpinalContextApp = require("./SpinalContextApp");
-
+const Constant = require('./constants');
 if (typeof G_root.spinal === "undefined") G_root.spinal = {};
 if (typeof G_root.spinal.spinalContextMenuService === "undefined")
   G_root.spinal.spinalContextMenuService = new SpinalContextMenuService();
 
 module.exports = {
+  constants: Constant,
   spinalContextMenuService: G_root.spinal.spinalContextMenuService,
   SpinalContextApp,
   install(Vue) {
