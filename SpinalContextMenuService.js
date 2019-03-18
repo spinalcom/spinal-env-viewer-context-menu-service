@@ -44,21 +44,23 @@ class SpinalContextMenuService {
    * @param appProfileId
    * @return {PromiseLike<boolean > | Promise<boolean>}
    */
-  hasUserRight(appProfileId){
+  hasUserRight( appProfileId ) {
     const path = '/etc/UserProfileDir/' + window.spinal.spinalSystem.getUser().username;
+    return window.spinal.spinalSystem.init().then( () => {
       return window.spinal.spinalSystem
-        .load(path)
-        .then((userProfile) => {
+        .load( path )
+        .then( ( userProfile ) => {
           let res = false;
-          if (userProfile){
+          if (userProfile) {
             for (let i = 0; i < userProfile.appProfiles.length && !res; i++) {
               res = (userProfile.appProfiles[i] & appProfileId) !== 0;
             }
           }
           return res;
-        });
-    }
-  
+        } );
+    } );
+    
+  }
   
   
   /**
@@ -70,16 +72,16 @@ class SpinalContextMenuService {
    * button
    * @memberof SpinalContextMenuService
    */
-  registerApp(hookname, spinalContextApp, appProfileId) {
+  registerApp( hookname, spinalContextApp, appProfileId ) {
     if (typeof appProfileId === "undefined") {
-      console.warn('Deprecated: The usage of this function without the third' +
+      console.warn( 'Deprecated: The usage of this function without the third' +
         ' parameter appProfileId is deprecated your button is lock for admin' +
-        ' only until you set the third parameter');
+        ' only until you set the third parameter' );
       appProfileId = 1;
     }
     // get the array of apps of the hook
     let appsInHooks = this.apps[hookname];
-
+    
     // create the array if not exist
     if (!(appsInHooks instanceof Array)) {
       appsInHooks = this.apps[hookname] = [];
@@ -87,19 +89,19 @@ class SpinalContextMenuService {
     
     
     if (!this.promiseByAppProfileId.hasOwnProperty( appProfileId )) {
-      this.promiseByAppProfileId[appProfileId] = this.hasUserRight(appProfileId);
+      this.promiseByAppProfileId[appProfileId] = this.hasUserRight( appProfileId );
     }
     
     this.promiseByAppProfileId[appProfileId].then(
       hasAccess => {
         // push the app if not exist ans user has access to the button
-        if (hasAccess && appsInHooks.indexOf(spinalContextApp) === -1 ) {
-          appsInHooks.push(spinalContextApp);
+        if (hasAccess && appsInHooks.indexOf( spinalContextApp ) === -1) {
+          appsInHooks.push( spinalContextApp );
         }
       }
     )
   }
-
+  
   /**
    * method to get the applications registered to a hookname
    *
@@ -108,40 +110,40 @@ class SpinalContextMenuService {
    * @memberof SpinalContextMenuService
    * @returns {Promise} resolve : [spinalContextApp, ...]; reject: Error
    */
-  getApps(hookname, option) {
+  getApps( hookname, option ) {
     // get the array of apps of the hook
     let appsInHooks = this.apps[hookname];
-
+    
     // create the array if not exist
     if (!(appsInHooks instanceof Array)) {
-      return Promise.resolve([]);
+      return Promise.resolve( [] );
     }
-
-    let promises = appsInHooks.map(e => {
+    
+    let promises = appsInHooks.map( e => {
       try {
-        let prom = e.isShown(option)
-          .then((res) => {
+        let prom = e.isShown( option )
+          .then( ( res ) => {
             return res;
-          });
+          } );
         return prom;
-
-      } catch (error) {
-        console.error(error);
+        
+      } catch ( error ) {
+        console.error( error );
         return -1;
       }
-    });
-    return Promise.all(promises)
+    } );
+    return Promise.all( promises )
       .then(
         results => {
           const resultApps = [];
           for (var i = 0; i < results.length; i++) {
-            if (results[i] !== -1) resultApps.push(appsInHooks[i]);
+            if (results[i] !== -1) resultApps.push( appsInHooks[i] );
           }
           return resultApps;
         },
         () => []
       )
-      .catch(console.error);
+      .catch( console.error );
   }
 }
 
