@@ -53,7 +53,7 @@ class SpinalContextMenuService {
           let res = false;
           if (userProfile) {
             for (let i = 0; i < userProfile.appProfiles.length && !res; i++) {
-              res = (userProfile.appProfiles[i] & appProfileId) !== 0;
+              res = (1 << userProfile.appProfiles[i] & appProfileId) !== 0;
             }
           }
           return res;
