@@ -97,7 +97,8 @@ spinalContextMenuService
 * [SpinalContextMenuService](#SpinalContextMenuService)
     * [new SpinalContextMenuService()](#new_SpinalContextMenuService_new)
     * _instance_
-        * [.registerApp(hookname, spinalContextApp)](#SpinalContextMenuService+registerApp)
+        * [.hasUserRight(appProfileId)](#SpinalContextMenuService+hasUserRight) ⇒ <code>PromiseLike.&lt;boolean&gt;</code> \| <code>Promise.&lt;boolean&gt;</code>
+        * [.registerApp(hookname, spinalContextApp, appProfileId)](#SpinalContextMenuService+registerApp)
         * [.getApps(hookname, option)](#SpinalContextMenuService+getApps) ⇒ <code>Promise</code>
     * _static_
         * [.SpinalContextMenuService](#SpinalContextMenuService.SpinalContextMenuService)
@@ -108,9 +109,20 @@ spinalContextMenuService
 ### new SpinalContextMenuService()
 Containter like service to register and get applications relative to a hookname
 
+<a name="SpinalContextMenuService+hasUserRight"></a>
+
+### spinalContextMenuService.hasUserRight(appProfileId) ⇒ <code>PromiseLike.&lt;boolean&gt;</code> \| <code>Promise.&lt;boolean&gt;</code>
+Return true if user has access to this appProfile
+
+**Kind**: instance method of [<code>SpinalContextMenuService</code>](#SpinalContextMenuService)  
+
+| Param |
+| --- |
+| appProfileId | 
+
 <a name="SpinalContextMenuService+registerApp"></a>
 
-### spinalContextMenuService.registerApp(hookname, spinalContextApp)
+### spinalContextMenuService.registerApp(hookname, spinalContextApp, appProfileId)
 method to register the Application to a hook
 
 **Kind**: instance method of [<code>SpinalContextMenuService</code>](#SpinalContextMenuService)  
@@ -119,6 +131,7 @@ method to register the Application to a hook
 | --- | --- | --- |
 | hookname | <code>string</code> | the place where is application button is located |
 | spinalContextApp | [<code>SpinalContextApp</code>](#SpinalContextApp) | the application |
+| appProfileId | <code>number</code> | id of the group that can use the application button |
 
 <a name="SpinalContextMenuService+getApps"></a>
 
